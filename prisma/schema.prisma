@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Aluno {
+  id          Int       @id @default(autoincrement())
+  nome        String
+  email       String    @unique
+  senhaHash   String
+  nascimento  DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  inscricoes  Inscricao[]
+}
+
+model Curso {
+  id          Int       @id @default(autoincrement())
+  nome        String
+  descricao   String
+  capa        String
+  inicio      DateTime
+  createdAt   DateTime  @default(now())
+
+  inscricoes  Inscricao[]
+}
+
+model Inscricao {
+  id           Int       @id @default(autoincrement())
+  alunoId      Int
+  cursoId      Int
+  canceladaEm  DateTime?
+
+  createdAt    DateTime  @default(now())
+
+  @@unique([alunoId, cursoId])
+
+  aluno        Aluno     @relation(fields: [alunoId], references: [id])
+  curso        Curso     @relation(fields: [cursoId], references: [id])
+}
