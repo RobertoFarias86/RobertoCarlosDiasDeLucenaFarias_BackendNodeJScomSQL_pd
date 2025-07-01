@@ -30,6 +30,7 @@ A Plataforma Bastet é um sistema completo para gerenciamento de cursos online, 
 ---
 
 ##  Instalação e Execução
+https://github.com/RobertoFarias86/front-bastet este é o repositorio do frontend
 
 Siga os passos abaixo no terminal para rodar o projeto:
 
